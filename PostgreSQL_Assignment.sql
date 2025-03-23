@@ -42,14 +42,14 @@ INSERT INTO books (title, author, price, stock, published_year) VALUES
 ('Pride and Prejudice', 'Jane Austen', 11.99, 0, 1813),
 ('War and Peace', 'Leo Tolstoy', 19.99, 0, 1869),
 ('Crime and Punishment', 'Fyodor Dostoevsky', 13.99, 0, 1866),
-('The Odyssey', 'Homer', 15.99, 0, -800);
+('The Odyssey', 'Homer', 15.99, 0, 800);
 
 SELECT * FROM books;
 
 CREATE TABLE customers (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
     -- joined_date TIMESTAMP DEFAULT NOW()
     joined_date DATE DEFAULT CURRENT_DATE
 );
