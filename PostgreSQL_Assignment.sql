@@ -44,7 +44,6 @@ INSERT INTO books (title, author, price, stock, published_year) VALUES
 ('Crime and Punishment', 'Fyodor Dostoevsky', 13.99, 0, 1866),
 ('The Odyssey', 'Homer', 15.99, 0, -800);
 
-
 SELECT * FROM books;
 
 CREATE TABLE customers (
@@ -91,28 +90,28 @@ INSERT INTO orders (customer_id, book_id, quantity) VALUES
 (9, 1, 4),
 (10, 6, 2);
 
-
 SELECT * FROM orders;
 
--- *Find books that are out of stock
+-- *1. Find books that are out of stock
 SELECT * FROM books
     WHERE stock = 0;
 
--- *Retrieve the most expensive book in the store.
+-- *2. Retrieve the most expensive book in the store.
 SELECT * FROM books
     WHERE price = (SELECT MAX(price) FROM books)
 
--- * Find the total number of orders placed by each customer.
+-- *3. Find the total number of orders placed by each customer.
 SELECT customers.name, COUNT(orders.id) AS total_orders
     FROM orders 
     JOIN customers  ON orders.customer_id = customers.id
     GROUP BY customers.name;
 
--- * Calculate the total revenue generated from book sales.
-SELECT SUM(books.price * orders.quantity) AS total_revenue FROM orders
+-- *4. Calculate the total revenue generated from book sales.
+SELECT SUM(books.price * orders.quantity) AS total_revenue
+     FROM orders
     JOIN books ON orders.book_id = books.id;
 
--- *List all customers who have placed more than one order.
+-- *5. List all customers who have placed more than one order.
 SELECT customers.name, COUNT(orders.id) AS  orders_count
     FROM customers
     JOIN orders ON customers.id = orders.customer_id
@@ -120,7 +119,7 @@ SELECT customers.name, COUNT(orders.id) AS  orders_count
     HAVING COUNT(orders.id) > 1;
 
 -- *Find the average price of books in the store.
-SELECT AVG(price) AS avg_book_price
+SELECT ROUND(AVG(price), 2) AS avg_book_price
     FROM books;
 
 
