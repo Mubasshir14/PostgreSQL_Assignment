@@ -118,16 +118,16 @@ SELECT customers.name, COUNT(orders.id) AS  orders_count
     GROUP BY customers.name
     HAVING COUNT(orders.id) > 1;
 
--- *Find the average price of books in the store.
+-- *6. Find the average price of books in the store.
 SELECT ROUND(AVG(price), 2) AS avg_book_price
     FROM books;
 
 
--- *Increase the price of all books published before 2000 by 10%.
+-- *7. Increase the price of all books published before 2000 by 10%.
 UPDATE books
  SET price = price * 1.10
  WHERE published_year < 2000
 
---  *Delete customers who haven't placed any orders.
+--  *8. Delete customers who haven't placed any orders.
 DELETE FROM customers
     WHERE id NOT IN ( SELECT DISTINCT customer_id FROM orders);
